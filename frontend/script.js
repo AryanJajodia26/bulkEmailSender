@@ -5,6 +5,9 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
+// Backend URL - Update this with your Render backend URL
+const BACKEND_URL = 'https://bulkemailsender-2.onrender.com'; // Your actual Render URL
+
 const form = document.getElementById('emailForm');
 const statusBox = document.getElementById('statusBox');
 
@@ -34,7 +37,7 @@ form.addEventListener('submit', async function (e) {
     statusBox.innerHTML += `<div class="status-item">🔐 Verifying Gmail authentication...</div>`;
     
     try {
-        const verifyResponse = await fetch('/verify', {
+        const verifyResponse = await fetch(`${BACKEND_URL}/verify`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +82,7 @@ form.addEventListener('submit', async function (e) {
         statusBox.innerHTML += `<div class="status-item">📧 Sending first email to ${firstRecipient}...</div>`;
 
         try {
-            const backendResponse = await fetch('/send-email', {
+            const backendResponse = await fetch(`${BACKEND_URL}/send-email`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -116,7 +119,7 @@ form.addEventListener('submit', async function (e) {
         remainingRecipients.forEach((to, i) => {
             setTimeout(async () => {
                 try {
-                    const backendResponse = await fetch('/send-email', {
+                    const backendResponse = await fetch(`${BACKEND_URL}/send-email`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
