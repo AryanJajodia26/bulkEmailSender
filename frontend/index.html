@@ -38,7 +38,7 @@
     }
 
     .header h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 700;
       background: linear-gradient(135deg, #667eea, #764ba2);
       -webkit-background-clip: text;
@@ -184,10 +184,6 @@
     }
 
     .author-card {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform: translateY(-50%);
       max-width: 220px;
       box-sizing: border-box;
       font-size: 0.9rem;
@@ -226,31 +222,28 @@
     }
 
     .help-btn {
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 35px;
       height: 35px;
       border-radius: 50%;
       background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
+      color: #fff;
       border: none;
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       text-decoration: none;
       transition: all 0.3s ease;
-      z-index: 10;
+      margin-left: 4px;
       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     }
 
-    .help-btn:hover {
-      transform: translateY(-50%) scale(1.1);
+    .help-btn:hover, .help-btn:focus {
+      background: linear-gradient(135deg, #5a6fd8, #6a4190);
       box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      transform: scale(1.1);
     }
 
     /* Custom scrollbar */
@@ -297,16 +290,16 @@
         min-height: unset;
       }
       .header h1 {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         text-align: center;
         width: 100%;
       }
-      .author-card {
-        position: static;
-        transform: none;
-        margin-top: 4px;
-        max-width: 95vw;
-        font-size: 0.95rem;
+      .floating-author {
+        position: fixed;
+        top: 8px;
+        right: 8px;
+        max-width: 70vw;
+        font-size: 0.9rem;
         padding: 7px 10px;
       }
       .container {
@@ -348,17 +341,18 @@
         padding: 0 2px;
       }
       .header h1 {
-        font-size: 1rem;
+        font-size: 1.1rem;
         text-align: center;
       }
-      .author-card {
+      .floating-author {
+        position: fixed;
+        top: 4px;
+        right: 2vw;
+        max-width: 90vw;
         font-size: 0.85rem;
         padding: 5px 2px;
-        margin-top: 6px;
         border-radius: 8px;
         box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-        position: static;
-        transform: none;
       }
       .section-title {
         font-size: 1rem;
@@ -368,18 +362,43 @@
         padding: 7px 10px;
       }
     }
+    .helper-text {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 2px;
+      margin-left: 2px;
+      text-align: left;
+    }
+    .floating-author {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      margin: 0;
+      z-index: 1000;
+      opacity: 0.97;
+      transition: box-shadow 0.2s;
+    }
+    .floating-author:hover {
+      box-shadow: 0 6px 24px rgba(102,126,234,0.18);
+    }
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
   </style>
 </head>
 <body>
   <div class="header">
     <div class="header-flex">
       <h1>📩 Bulk Mail Sender</h1>
-      <div class="author-card">
-        <span class="name">Aryan Jajodia</span>
-        <span class="institution">IIT Patna</span>
-      </div>
     </div>
     <p>Send bulk emails with Gmail authentication and time-gapped delivery without spam</p>
+  </div>
+  <div class="author-card floating-author">
+    <span class="name">Aryan Jajodia</span>
+    <span class="institution">IIT Patna</span>
   </div>
 
   <form id="emailForm">
@@ -388,9 +407,10 @@
         <h2 class="section-title">Sender Information</h2>
         <input type="email" id="your_email" placeholder="Your Gmail Address" required>
         <div class="input-group">
-          <input type="password" id="app_pass" placeholder="App Password (16 characters)     [Note:Don't enter your gmail password]👉" required>
-          <a href="https://docs.google.com/document/d/1dyNTOKX1S1xI_AM7Kv3jKXgmR5r0poPvHbglBAKajPQ/edit?addon_store&tab=t.0#heading=h.babklfic9rem" target="_blank" class="help-btn" title="Help with App Password">?</a>
+          <input type="password" id="app_pass" placeholder="App Password (16 characters) 👉" required>
+          <a href="https://docs.google.com/document/d/1dyNTOKX1S1xI_AM7Kv3jKXgmR5r0poPvHbglBAKajPQ/edit?addon_store&tab=t.0#heading=h.babklfic9rem" target="_blank" class="help-btn" title="What is an App Password?">?</a>
         </div>
+        <div class="helper-text">[Note: Don't enter your Gmail password]</div>
         <input type="text" id="subject" placeholder="Email Subject" required>
         <textarea id="mail_content" placeholder="Email Body Content" required rows="4"></textarea>
         <input type="number" id="time_gap" placeholder="Time Gap Between Emails (seconds)" required min="1">
