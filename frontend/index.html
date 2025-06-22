@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Bulk Email Sender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
       margin: 0;
@@ -23,6 +24,17 @@
       text-align: center;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+    }
+
+    .header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
     }
 
     .header h1 {
@@ -30,10 +42,11 @@
       font-weight: 700;
       background: linear-gradient(135deg, #667eea, #764ba2);
       -webkit-background-clip: text;
-      
       background-clip: text;
-      margin: 0;
+      margin: 0 auto;
       letter-spacing: -1px;
+      text-align: center;
+      flex: 1 1 auto;
     }
 
     .header p {
@@ -172,20 +185,18 @@
 
     .author-card {
       position: absolute;
-      top: 20px;
-      left: 1080px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 15px 22px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #667eea;
-      text-align: center;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
       max-width: 220px;
-      z-index: 100;
+      box-sizing: border-box;
+      font-size: 0.9rem;
+      padding: 12px 18px;
+      text-align: center;
+      background: rgba(255,255,255,0.97);
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      z-index: 10;
     }
 
     .author-card .name {
@@ -262,26 +273,112 @@
     }
 
     /* Responsive design */
+    @media (max-width: 1024px) {
+      .container {
+        max-width: 98vw;
+        padding: 10px;
+      }
+      .header-flex {
+        padding: 0 8px;
+        min-height: 60px;
+      }
+      .author-card {
+        max-width: 180px;
+        font-size: 0.85rem;
+        padding: 10px 8px;
+        right: 8px;
+      }
+    }
     @media (max-width: 768px) {
+      .header-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        min-height: unset;
+      }
+      .header h1 {
+        font-size: 1.2rem;
+        text-align: center;
+        width: 100%;
+      }
+      .author-card {
+        position: static;
+        transform: none;
+        margin-top: 4px;
+        max-width: 95vw;
+        font-size: 0.95rem;
+        padding: 7px 10px;
+      }
       .container {
         flex-direction: column;
         height: auto;
-        padding: 10px;
+        padding: 8px;
+        gap: 12px;
       }
-      
       .left, .right {
         width: 100%;
+        padding: 16px;
+        min-width: 0;
       }
-      
+      .clock {
+        position: static;
+        margin-bottom: 10px;
+        display: block;
+        width: fit-content;
+      }
+      .section-title {
+        font-size: 1.1rem;
+      }
+      input, textarea, button {
+        font-size: 1rem;
+        padding: 12px;
+      }
+      #statusBox {
+        padding: 10px;
+      }
+    }
+    @media (max-width: 480px) {
+      .header {
+        padding: 10px 0;
+      }
+      .header-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 0 2px;
+      }
       .header h1 {
-        font-size: 2rem;
+        font-size: 1rem;
+        text-align: center;
+      }
+      .author-card {
+        font-size: 0.85rem;
+        padding: 5px 2px;
+        margin-top: 6px;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        position: static;
+        transform: none;
+      }
+      .section-title {
+        font-size: 1rem;
+      }
+      .clock {
+        font-size: 1rem;
+        padding: 7px 10px;
       }
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <h1>📩 Bulk Mail Sender</h1>
+    <div class="header-flex">
+      <h1>📩 Bulk Mail Sender</h1>
+      <div class="author-card">
+        <span class="name">Aryan Jajodia</span>
+        <span class="institution">IIT Patna</span>
+      </div>
+    </div>
     <p>Send bulk emails with Gmail authentication and time-gapped delivery without spam</p>
   </div>
 
@@ -307,11 +404,6 @@
       </div>
     </div>
   </form>
-
-  <div class="author-card">
-    <span class="name">Aryan Jajodia</span>
-    <span class="institution">IIT Patna</span>
-  </div>
 
   <script src="script.js"></script>
 </body>
